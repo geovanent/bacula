@@ -24,8 +24,8 @@ RUN apt-get -o Acquire::GzipIndexes=false update
 RUN apt-get update && apt-get install -y nano gnupg wget apt-show-versions libdbd-mysql-perl
 
 RUN echo 'deb http://download.webmin.com/download/repository sarge contrib' | tee --append /etc/apt/sources.list.d/webmin-cache.list > /dev/null \
-    echo 'deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib' | tee --append /etc/apt/sources.list.d/webmin-cache.list > /dev/null \
-    wget http://www.webmin.com/jcameron-key.asc && apt-key add jcameron-key.asc
+    && echo 'deb http://webmin.mirror.somersettechsolutions.co.uk/repository sarge contrib' | tee --append /etc/apt/sources.list.d/webmin-cache.list > /dev/null \
+    && cd ~/ && wget http://www.webmin.com/jcameron-key.asc && apt-key add jcameron-key.asc
 
 RUN apt-get update && apt-get install webmin -y && service webmin start
 
@@ -81,3 +81,5 @@ HEALTHCHECK --interval=1m --timeout=10s --start-period=10s --retries=1 CMD ["/do
 ENTRYPOINT ["/docker-entrypoint.d/entrypoint.sh"]
 
 CMD tail -f /var/log/bacula/bacula.log
+
+EXPOSE 9101 9103 10000

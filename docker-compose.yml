@@ -6,7 +6,9 @@ services:
     environment: 
       MYSQL_ROOT_PASSWORD: root      
     volumes:
-      - ./catalog/data:/var/lib/mysql      
+      - ./catalog/data:/var/lib/mysql  
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"    
     networks: 
       default:
     restart: always
@@ -14,8 +16,15 @@ services:
     container_name: bacula_director
     image: popprrnp/bacula-dir:latest
     tty: true
+    ports:
+      - 9103:9103
+      - 1010:10000
     volumes:
+      -  /Discos/:/Discos/
       - ./director/data:/etc/bacula/
+      - ./director/wemin:/etc/webmin/
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
     networks:      
       default:    
     depends_on: 

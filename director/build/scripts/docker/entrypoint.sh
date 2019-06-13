@@ -94,7 +94,6 @@ main()
 {
     test_mysql_conn
     test_lock
-	set_root_passwd
     local lock=$?        
     if [ $lock -eq 0 ]; then
         start_process
