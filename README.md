@@ -139,7 +139,7 @@ services:
     restart: always
   director:
     container_name: bacula_director
-    image: popprrnp/bacula-dir:latest
+    image: geovanent/bacula-dir:v1
     tty: true
     volumes:
       - type: bind
