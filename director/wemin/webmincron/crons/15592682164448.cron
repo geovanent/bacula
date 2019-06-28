@@ -1,4 +1,0 @@
-func=cleanup_temp_files
-module=cron
-id=15592682164448
-interval=3600
